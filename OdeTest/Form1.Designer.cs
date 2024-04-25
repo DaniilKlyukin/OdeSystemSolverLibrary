@@ -28,32 +28,32 @@
         /// </summary>
         private void InitializeComponent()
         {
-            formsPlot1 = new ScottPlot.WinForms.FormsPlot();
+            formsPlot = new ScottPlot.WinForms.FormsPlot();
             SuspendLayout();
             // 
-            // formsPlot1
+            // formsPlot
             // 
-            formsPlot1.DisplayScale = 1F;
-            formsPlot1.Dock = DockStyle.Fill;
-            formsPlot1.Location = new Point(0, 0);
-            formsPlot1.Name = "formsPlot1";
-            formsPlot1.Size = new Size(800, 450);
-            formsPlot1.TabIndex = 0;
+            formsPlot.DisplayScale = 1F;
+            formsPlot.Dock = DockStyle.Fill;
+            formsPlot.Location = new Point(0, 0);
+            formsPlot.Name = "formsPlot";
+            formsPlot.Size = new Size(800, 450);
+            formsPlot.TabIndex = 0;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(formsPlot1);
+            Controls.Add(formsPlot);
             Name = "Form1";
-            Text = "Form1";
+            Text = "Example";
             Load += Form1_Load;
             ResumeLayout(false);
         }
 
         #endregion
 
-        private ScottPlot.WinForms.FormsPlot formsPlot1;
+        private ScottPlot.WinForms.FormsPlot formsPlot;
     }
 }

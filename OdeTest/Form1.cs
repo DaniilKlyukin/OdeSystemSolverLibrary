@@ -1,5 +1,4 @@
 using OdeSystemSolverLibrary;
-using OdeSystemSolverLibrary.Solvers;
 using OdeSystemSolverLibrary.Solvers.TableSolvers;
 
 namespace OdeTest
@@ -32,6 +31,7 @@ namespace OdeTest
                 x = [10, 1, 1]
             };*/
 
+            formsPlot.Plot.ShowLegend();
             var rk4Step = new RungeKutta4StepSolver(0.001, 3)
             {
                 Function = (t, x, dxdt) =>
@@ -87,9 +87,7 @@ namespace OdeTest
                 EpsilonVectorNorm = (eps) => eps.Sum(e => Math.Abs(e)),
             };
 
-            SolveExample(dp87Step, "Dormand-Prince 87");
-
-            formsPlot1.Plot.ShowLegend();
+            SolveExample(dp87Step, "Dormand-Prince 87");            
         }
 
         private void SolveExample(OdeStepSolver stepSolver, string label)
@@ -114,7 +112,7 @@ namespace OdeTest
 
             solver.Solve();
 
-            var sc1 = formsPlot1.Plot.Add.Scatter(x2, x0);
+            var sc1 = formsPlot.Plot.Add.Scatter(x2, x0);
             sc1.MarkerShape = ScottPlot.MarkerShape.None;
             sc1.Label = label;
         }
