@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34607.119
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OdeSystemSolverLibrary", "OdeSystemSolverLibrary\OdeSystemSolverLibrary.csproj", "{C1DEF4EA-DC60-4F4B-B12A-DC99583400DB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OdeTest", "OdeTest\OdeTest.csproj", "{A1C28D14-773B-4DED-B8A8-67D2ED4275E3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C1DEF4EA-DC60-4F4B-B12A-DC99583400DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1DEF4EA-DC60-4F4B-B12A-DC99583400DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1DEF4EA-DC60-4F4B-B12A-DC99583400DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1DEF4EA-DC60-4F4B-B12A-DC99583400DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1C28D14-773B-4DED-B8A8-67D2ED4275E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1C28D14-773B-4DED-B8A8-67D2ED4275E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1C28D14-773B-4DED-B8A8-67D2ED4275E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1C28D14-773B-4DED-B8A8-67D2ED4275E3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B79C6BA5-5916-4456-BD1F-79E290BBB9F8}
+	EndGlobalSection
+EndGlobal
