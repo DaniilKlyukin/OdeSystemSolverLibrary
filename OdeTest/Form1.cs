@@ -13,7 +13,7 @@ namespace OdeTest
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            var rk4Step = new DormandPrince87StepSolver(1.0 / 4, 1)
+            var rk4Step = new AdamsMultonStepSolver(1.0 / 8, 1,1e-12)
             {
                 Function = (t, x, dxdt) =>
                 {
@@ -21,15 +21,13 @@ namespace OdeTest
                 },
                 t = 0,
                 x = [1],
-                dtMaxMultiplier = 4,
-                Tolerance = 1e-12,
-                EpsilonVectorNorm = (eps) => eps.Sum(e => Math.Abs(e)),
+                
             };
 
             var solver = new OdeSolver
             {
                 StepSolver = rk4Step,
-                Stop = (t, x) => t >= 1
+                Stop = (t, x) => t >= 1,
             };
 
             solver.Solve();
