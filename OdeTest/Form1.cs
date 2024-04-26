@@ -1,5 +1,6 @@
 using OdeSystemSolverLibrary;
 using OdeSystemSolverLibrary.Solvers.TableSolvers;
+using ScottPlot.Plottables;
 
 namespace OdeTest
 {
@@ -31,6 +32,62 @@ namespace OdeTest
                 x = [10, 1, 1]
             };*/
 
+            
+            formsPlot.Plot.ShowLegend();
+            var stepSolver = new GaussLegendre3StepSolver(0.001, 2, 1e-6)
+            {
+                Function = (t, x, dxdt) =>
+                {
+                    const double g = 9.81;
+
+                    dxdt[0] = -g;
+                    dxdt[1] = x[0];
+                },
+                t = 0,
+                x = [0, 10],
+                dtMaxMultiplier = 4,
+                Tolerance = 1e-6,
+                EpsilonVectorNorm = (eps) => eps.Sum(e => Math.Abs(e)),
+            };
+
+            var timeList = new List<double>();
+            var yList = new List<double>();
+            var vList = new List<double>();
+
+            var solver = new OdeSolver
+            {
+                StepSolver = stepSolver,
+                Stop = (t, x) => x[1] <= 0,
+                EndInterpolator = new EndChordInterpolator(1e-6)
+                {
+                    OdeDistanceToStop = (t, x) => x[1]
+                },
+                Observer = (t, x) =>
+                {
+                    timeList.Add(t);
+                    vList.Add(x[0]);
+                    yList.Add(x[1]);
+                }
+            };
+
+            solver.Solve();
+
+            var sc1 = formsPlot.Plot.Add.Scatter(timeList, yList);
+            sc1.MarkerShape = ScottPlot.MarkerShape.None;
+            sc1.Label = "y, м";
+
+            var sc2 = formsPlot.Plot.Add.Scatter(timeList, vList);
+            sc2.MarkerShape = ScottPlot.MarkerShape.None;
+            sc2.Axes.YAxis = formsPlot.Plot.Axes.Right;
+            sc2.Label = "V, м/с";
+            formsPlot.Plot.ShowLegend(ScottPlot.Alignment.UpperRight);
+
+            formsPlot.Plot.XLabel("t, сек");
+            formsPlot.Plot.YLabel("y, м");
+            formsPlot.Plot.Axes.Right.Label.Text = "V, м/с";
+
+            /*
+            return;
             formsPlot.Plot.ShowLegend();
             var rk4Step = new RungeKutta4StepSolver(0.001, 3)
             {
@@ -79,7 +136,7 @@ namespace OdeTest
                     dxdt[0] = sigma * (x[1] - x[0]);
                     dxdt[1] = r * x[0] - x[1] - x[0] * x[2];
                     dxdt[2] = -b * x[2] + x[0] * x[1];
-                },                
+                },
                 t = 0,
                 x = [10, 1, 1],
                 dtMaxMultiplier = 4,
@@ -87,7 +144,7 @@ namespace OdeTest
                 EpsilonVectorNorm = (eps) => eps.Sum(e => Math.Abs(e)),
             };
 
-            SolveExample(dp87Step, "Dormand-Prince 87");            
+            SolveExample(dp87Step, "Dormand-Prince 87");*/
         }
 
         private void SolveExample(OdeStepSolver stepSolver, string label)
