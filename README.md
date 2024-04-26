@@ -55,7 +55,8 @@ scatter.Label = "Runge-Kutta 4";
 
 formsPlot.Plot.ShowLegend();
 ```
-![image](https://github.com/DaniilKlyukin/OdeSystemSolverLibrary/assets/32903150/40411194-f6cc-4d56-b9cd-1b9bb5dbb5a6)
+
+![image](https://github.com/DaniilKlyukin/OdeSystemSolverLibrary/assets/32903150/64beca23-3e7c-4b36-a3f9-3356361bfbe0)
 
 Пошаговый решатель также удобен при решении задач, где необходимо менять функцию правых частей и перерешивать пройденный шаг с новыми условиями.
 
@@ -104,7 +105,7 @@ var x2 = new List<double>();
 
 var solver = new OdeSolver
 {
-    StepSolver = stepSolver,
+    StepSolver = rkf54Step,
     Stop = (t, x) => t >= 100,
     EndInterpolator = new EndChordInterpolator(1e-6)
     {
@@ -119,10 +120,12 @@ var solver = new OdeSolver
 
 solver.Solve();
 
-var sc1 = formsPlot.Plot.Add.Scatter(x2, x0);
-sc1.MarkerShape = ScottPlot.MarkerShape.None;
-sc1.Label = label;
+var sc = formsPlot.Plot.Add.Scatter(x2, x0);
+sc.MarkerShape = ScottPlot.MarkerShape.None;
+sc.Label = "Runge-Kutta-Felberg 5";
 ```
+
+![image](https://github.com/DaniilKlyukin/OdeSystemSolverLibrary/assets/32903150/1a2afe25-b7b5-4349-b612-71a41bf289fa)
 
 Для всех адаптиваных методов задается блок:
 
@@ -180,7 +183,6 @@ var solver = new OdeSolver
 solver.Solve();
 ```
 
-![image](https://github.com/DaniilKlyukin/OdeSystemSolverLibrary/assets/32903150/d0d7f94f-1e88-49c2-95c9-fa5e18fe2edc)
-
+![image](https://github.com/DaniilKlyukin/OdeSystemSolverLibrary/assets/32903150/e0fa059d-ab55-4e34-92ba-8efe56246a69)
 
 
