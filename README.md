@@ -127,7 +127,11 @@ sc.Label = "Runge-Kutta-Felberg 5";
 
 ![image](https://github.com/DaniilKlyukin/OdeSystemSolverLibrary/assets/32903150/1a2afe25-b7b5-4349-b612-71a41bf289fa)
 
-Для всех адаптиваных методов задается блок:
+### Параметры методов / Method Parameters
+
+Для всех адаптивных методов задается блок:
+
+A block is set for all adaptive methods:
 
 ``` cs
 dtMaxMultiplier = 4,                                   // во сколько раз может уменьшиться или увеличиться шаг;
@@ -137,6 +141,8 @@ EpsilonVectorNorm = (eps) => eps.Sum(e => Math.Abs(e)) // метод расче�
 
 Условие окончания расчета задается с помощью делегата
 
+The condition for the end of the calculation is set using a delegate
+
 ``` cs
 Stop = (t, x) => ...,
 ```
@@ -144,6 +150,8 @@ Stop = (t, x) => ...,
 Условие окончания расчета можно наложить не только на независимую переменную t, но и на фазовые переменные **x**.
 
 Чтобы избежать перескакивания за последнюю точке, в которой происходит окончание расчета, необходимо использовать интерполяцию:
+
+To avoid jumping over the last point at which the calculation ends, it is necessary to use interpolation:
 
 ``` cs
 EndInterpolator = new EndChordInterpolator(1e-6)
@@ -154,10 +162,16 @@ EndInterpolator = new EndChordInterpolator(1e-6)
 
 В данном примере класс ищет решение задачи  t - 100 = 0.
 
+In this example, the class and its value are t - 100 = 0.
+
+### Пример падение объекта / Example of an object falling
+
 Рассмотрим пример падение объекта с некоторой точки y<sub>0</sub> = 10 м, начальная скорость v<sub>0</sub> = 0 м/с. Момент времени, когда объект достигнет земли неизвестен, мы знаем только то, что в момент падения y = 0 м. Тогда условие окончания расчета будет y <= 0 и также нам необходимо интерполировать решение в точке y = 0.
 
+Consider an example of an object falling from some point y<sub>0</sub> = 10 m, initial velocity v<sub>0</sub> = 0 m/s. The moment of time when the object reaches the earth is unknown, we only know that at the moment of falling y = 0 m. Then the condition for the end of the calculation will be y <= 0 and we also need to interpolate the solution at the point y = 0.
+
 ``` cs
-var stepSolver = new RungeKutta4StepSolver(0.001, 3)
+var stepSolver = new GaussLegendre3StepSolver(0.001, 2, 1e-6)
 {
     Function = (t, x, dxdt) =>
     {
@@ -167,7 +181,10 @@ var stepSolver = new RungeKutta4StepSolver(0.001, 3)
         dxdt[1] = x[0];
     },
     t = 0,
-    x = [0, 10]
+    x = [0, 10],
+    dtMaxMultiplier = 4,
+    Tolerance = 1e-6,
+    EpsilonVectorNorm = (eps) => eps.Sum(e => Math.Abs(e)),
 };
 
 var solver = new OdeSolver
@@ -183,6 +200,6 @@ var solver = new OdeSolver
 solver.Solve();
 ```
 
-![image](https://github.com/DaniilKlyukin/OdeSystemSolverLibrary/assets/32903150/e0fa059d-ab55-4e34-92ba-8efe56246a69)
+![image](https://github.com/DaniilKlyukin/OdeSystemSolverLibrary/assets/32903150/5fcab53a-c3eb-466f-9384-6d9e69dce3cf)
 
-
+### Сравнение методов / Comparison of methods
