@@ -13,6 +13,32 @@ namespace OdeTest
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            var rk4Step = new DormandPrince87StepSolver(1.0 / 4, 1)
+            {
+                Function = (t, x, dxdt) =>
+                {
+                    dxdt[0] = x[0];
+                },
+                t = 0,
+                x = [1],
+                dtMaxMultiplier = 4,
+                Tolerance = 1e-12,
+                EpsilonVectorNorm = (eps) => eps.Sum(e => Math.Abs(e)),
+            };
+
+            var solver = new OdeSolver
+            {
+                StepSolver = rk4Step,
+                Stop = (t, x) => t >= 1
+            };
+
+            solver.Solve();
+            var v = rk4Step.x[0];
+            var d = Math.Abs(v - Math.E);
+
+            Console.WriteLine(v);
+
+            /*
             var dt = 1e-3;
 
             var rk4Step = new RungeKutta4StepSolver(dt, 3)
@@ -126,7 +152,7 @@ namespace OdeTest
 
             SolveExample(am4Step, "Adams-Multon 4");
 
-            formsPlot.Plot.ShowLegend(ScottPlot.Alignment.UpperRight);
+            formsPlot.Plot.ShowLegend(ScottPlot.Alignment.UpperRight);*/
         }
 
         private void SolveExample(OdeStepSolver stepSolver, string label)
