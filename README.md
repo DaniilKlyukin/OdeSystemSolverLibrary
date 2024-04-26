@@ -96,7 +96,7 @@ var rkf54Step = new RungeKuttaFehlberg54StepSolver(0.001, 3)
     x = [10, 1, 1],
     dtMaxMultiplier = 4,
     Tolerance = 1e-6,
-    EpsilonVectorNorm = (eps) => eps.Sum(e => Math.Abs(e)),
+    EpsilonVectorNorm = (eps) => eps.Sum(e => Math.Abs(e))
 };
 
 var x0 = new List<double>();
@@ -124,6 +124,14 @@ sc1.MarkerShape = ScottPlot.MarkerShape.None;
 sc1.Label = label;
 ```
 
+Для всех адаптиваных методов задается блок:
+
+``` cs
+dtMaxMultiplier = 4,                                   // во сколько раз может уменьшиться или увеличиться шаг;
+Tolerance = 1e-6,                                      // точность расчета на шаге в соответствии с заданной нормой;
+EpsilonVectorNorm = (eps) => eps.Sum(e => Math.Abs(e)) // метод расчета нормы ошибки на шаге;
+```
+
 Условие окончания расчета задается с помощью делегата
 
 ``` cs
@@ -143,7 +151,7 @@ EndInterpolator = new EndChordInterpolator(1e-6)
 
 В данном примере класс ищет решение задачи  t - 100 = 0.
 
-Рассмотрим пример падение объекта с некоторой высоты h_0 = 10 м, начальная скорость v_0 = 0 м/с. Момент времени, когда объект достигнет земли неизвестен, мы знаем только то, что в момент падения h = 0 м.
+Рассмотрим пример падение объекта с некоторой точки y<sub>0</sub> = 10 м, начальная скорость v<sub>0</sub> = 0 м/с. Момент времени, когда объект достигнет земли неизвестен, мы знаем только то, что в момент падения y = 0 м. Тогда условие окончания расчета будет y <= 0 и также нам необходимо интерполировать решение в точке y = 0.
 
 ``` cs
 var stepSolver = new RungeKutta4StepSolver(0.001, 3)
@@ -152,7 +160,7 @@ var stepSolver = new RungeKutta4StepSolver(0.001, 3)
     {
         const double g = 9.81;
 
-        dxdt[0] = g;
+        dxdt[0] = -g;
         dxdt[1] = x[0];
     },
     t = 0,
@@ -171,6 +179,8 @@ var solver = new OdeSolver
 
 solver.Solve();
 ```
+
+![image](https://github.com/DaniilKlyukin/OdeSystemSolverLibrary/assets/32903150/d0d7f94f-1e88-49c2-95c9-fa5e18fe2edc)
 
 
 
