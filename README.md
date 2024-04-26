@@ -127,7 +127,7 @@ sc.Label = "Runge-Kutta-Felberg 5";
 
 ![image](https://github.com/DaniilKlyukin/OdeSystemSolverLibrary/assets/32903150/1a2afe25-b7b5-4349-b612-71a41bf289fa)
 
-### Параметры методов / Method Parameters
+### Дополнительные параметры методов / Additional method parameters
 
 Для всех адаптивных методов задается блок:
 
@@ -203,3 +203,5 @@ solver.Solve();
 ![image](https://github.com/DaniilKlyukin/OdeSystemSolverLibrary/assets/32903150/5fcab53a-c3eb-466f-9384-6d9e69dce3cf)
 
 ### Сравнение методов / Comparison of methods
+
+
