@@ -1,4 +1,4 @@
-# Решатель систем дифференциальных уравнений / Solver of systems of differential equations
+# Решатель систем обыкновенных дифференциальных уравнений / Solver of systems of ordinary differential equations
 
 ## Реализованные методы / Implemented methods
 1. Явный Рунге-Кутта 4-го порядка / Explicit Runge-Kutta of the 4th order
@@ -12,6 +12,19 @@
 Для визуализации используется библиотека ScottPlot. Тестирование проводится на Аттракторе Лоренца:
 https://en.wikipedia.org/wiki/Lorenz_system
 
+```math
+\begin{cases}
+    \dfrac{dx}{dt}=\sigma\cdot(y-x) \\ \\
+    \dfrac{dy}{dt}=x\cdot(\rho-z)-y \\ \\
+    \dfrac{dz}{dt}=xy-\beta z
+\end{cases}
+```
+
+```math
+\begin{bmatrix}
+t_0=0, & x_0=10, & y_0=1, & z_0=1
+\end{bmatrix}
+```
 ### Пошаговое решение СОДУ / Step-by-step solution of a system of ordinary differential equations
 Рассмотрим пример пошагового решения с помощью метода Рунге-Кутта 4-го порядка.
 
@@ -160,15 +173,38 @@ EndInterpolator = new EndChordInterpolator(1e-6)
 },
 ```
 
-В данном примере класс ищет решение задачи  t - 100 = 0.
+В данном примере класс ```EndChordInterpolator``` ищет решение задачи  t - 100 = 0.
 
 In this example, the class and its value are t - 100 = 0.
 
-### Пример падение объекта / Example of an object falling
+### Сравнение методов / Comparison of methods
+
+![image](https://github.com/DaniilKlyukin/OdeSystemSolverLibrary/assets/32903150/136761ca-17a8-43d3-a9f5-0978adb61356)
+![image](https://github.com/DaniilKlyukin/OdeSystemSolverLibrary/assets/32903150/c4973f11-76ba-4485-bf9b-302606f73374)
+![image](https://github.com/DaniilKlyukin/OdeSystemSolverLibrary/assets/32903150/734ba4de-3ed8-4fcd-bf97-2c6abb3640a2)
+![image](https://github.com/DaniilKlyukin/OdeSystemSolverLibrary/assets/32903150/022f7dff-999f-4b7c-b689-6fd6226577f4)
+![image](https://github.com/DaniilKlyukin/OdeSystemSolverLibrary/assets/32903150/6e72483e-f1b6-49e4-9f8f-88ea40ccbe1c)
+![image](https://github.com/DaniilKlyukin/OdeSystemSolverLibrary/assets/32903150/7b7d84f3-89b6-4603-b0d6-ae582c0a3f81)
+
+
+## Пример падение объекта / Example of an object falling
 
 Рассмотрим пример падение объекта с некоторой точки y<sub>0</sub> = 10 м, начальная скорость v<sub>0</sub> = 0 м/с. Момент времени, когда объект достигнет земли неизвестен, мы знаем только то, что в момент падения y = 0 м. Тогда условие окончания расчета будет y <= 0 и также нам необходимо интерполировать решение в точке y = 0.
 
 Consider an example of an object falling from some point y<sub>0</sub> = 10 m, initial velocity v<sub>0</sub> = 0 m/s. The moment of time when the object reaches the earth is unknown, we only know that at the moment of falling y = 0 m. Then the condition for the end of the calculation will be y <= 0 and we also need to interpolate the solution at the point y = 0.
+
+```math
+\begin{cases}
+    \dfrac{dv}{dt}=-g \\ \\
+    \dfrac{dy}{dt}=v
+\end{cases}
+```
+
+```math
+\begin{bmatrix}
+t_0=0, & v_0=0, & y_0=10
+\end{bmatrix}
+```
 
 ``` cs
 var stepSolver = new GaussLegendre3StepSolver(0.001, 2, 1e-6)
@@ -201,7 +237,5 @@ solver.Solve();
 ```
 
 ![image](https://github.com/DaniilKlyukin/OdeSystemSolverLibrary/assets/32903150/5fcab53a-c3eb-466f-9384-6d9e69dce3cf)
-
-### Сравнение методов / Comparison of methods
 
 
