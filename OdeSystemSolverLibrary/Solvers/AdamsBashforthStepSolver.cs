@@ -1,42 +1,65 @@
-﻿namespace OdeSystemSolverLibrary.Solvers
+﻿using OdeSystemSolverLibrary.Solvers.TableSolvers;
+
+namespace OdeSystemSolverLibrary.Solvers
 {
-    public class AdamsBashforthStepSolver : AdamsStepSolver
+    public class AdamsBashforth4StepSolver : AdamsStepSolver
     {
         public override int StagesCount => 5;
 
-        public AdamsBashforthStepSolver(
+        public override int InitialSteps => 5;
+
+        public AdamsBashforth4StepSolver(
             double dt, int equationsCount)
             : base(dt, equationsCount)
         {
 
         }
 
-        protected override double[][] getCoefs()
+        protected override double[] getCoefs()
         {
             return
-                [
-                    [1.0],
-                    [-0.5, 1.5],
-                    [5.0 / 12, -16.0 / 12, 23.0 / 12],
-                    [-9.0 / 24, 37.0 / 24, -59.0 / 24, 55.0 / 24],
-                    [251.0 / 720, -1274.0 / 720, 2616.0 / 720, -2774.0 / 720, 1901.0 / 720]
-                ];
+                [251.0 / 720, -1274.0 / 720, 2616.0 / 720, -2774.0 / 720, 1901.0 / 720];
         }
 
-        protected override double[] solveAdamsInnerStep(int fRow)
+        protected override void solveStep()
         {
-            Function.Invoke(t, x, f[fRow]);
-
             for (int i = 0; i < x.Length; i++)
             {
                 var sum = 0.0;
-                for (int j = 0; j < a[fRow].Length; j++)
-                    sum += a[fRow][j] * f[j][i];
+                for (int j = 0; j < a.Length; j++)
+                    sum += a[j] * fArr[j][i];
 
                 x[i] += dt * sum;
             }
 
-            return x;
+            for (int i = 1; i < fArr.Length; i++)
+            {
+                for (int j = 0; j < fArr[i].Length; j++)
+                {
+                    fArr[i - 1][j] = fArr[i][j];
+                }
+            }
+
+            Function.Invoke(t + dt, x, fArr[fArr.Length - 1]);
+        }
+
+        public override void Reset()
+        {
+            base.Reset();
+
+            _solveStep = solveInitialStep;
+
+            boosterSolver = new DormandPrince87StepSolver(dt, x.Length)
+            {
+                Function = Function,
+                t = t,
+                x = new double[x.Length],
+                dtMaxMultiplier = 1,
+                Tolerance = 1e-10,
+                EpsilonVectorNorm = (eps) => eps.Sum(e => Math.Abs(e)),
+            };
+            Array.Copy(x, boosterSolver.x, x.Length);
+            Function.Invoke(t, x, fArr[0]);
         }
     }
 }

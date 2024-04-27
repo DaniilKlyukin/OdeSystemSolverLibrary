@@ -1,6 +1,8 @@
 using OdeSystemSolverLibrary;
 using OdeSystemSolverLibrary.Solvers;
 using OdeSystemSolverLibrary.Solvers.TableSolvers;
+using ScottPlot.WinForms;
+using System.Diagnostics;
 
 namespace OdeTest
 {
@@ -13,31 +15,7 @@ namespace OdeTest
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            var rk4Step = new AdamsMultonStepSolver(1.0 / 8, 1,1e-12)
-            {
-                Function = (t, x, dxdt) =>
-                {
-                    dxdt[0] = x[0];
-                },
-                t = 0,
-                x = [1],
-                
-            };
-
-            var solver = new OdeSolver
-            {
-                StepSolver = rk4Step,
-                Stop = (t, x) => t >= 1,
-            };
-
-            solver.Solve();
-            var v = rk4Step.x[0];
-            var d = Math.Abs(v - Math.E);
-
-            Console.WriteLine(v);
-
-            /*
-            var dt = 1e-3;
+            var dt = 1e-4;
 
             var rk4Step = new RungeKutta4StepSolver(dt, 3)
             {
@@ -70,7 +48,7 @@ namespace OdeTest
                 t = 0,
                 x = [10, 1, 1],
                 dtMaxMultiplier = 4,
-                Tolerance = 1e-6,
+                Tolerance = 1e-12,
                 EpsilonVectorNorm = (eps) => eps.Sum(e => Math.Abs(e)),
             };
 
@@ -90,13 +68,13 @@ namespace OdeTest
                 t = 0,
                 x = [10, 1, 1],
                 dtMaxMultiplier = 4,
-                Tolerance = 1e-6,
+                Tolerance = 1e-12,
                 EpsilonVectorNorm = (eps) => eps.Sum(e => Math.Abs(e)),
             };
 
             SolveExample(dp87Step, "Dormand-Prince 87");
 
-            var ab4Step = new AdamsBashforthStepSolver(dt, 3)
+            var ab4Step = new AdamsBashforth4StepSolver(dt, 3)
             {
                 Function = (t, x, dxdt) =>
                 {
@@ -110,10 +88,10 @@ namespace OdeTest
                 t = 0,
                 x = [10, 1, 1],
             };
-
+            ab4Step.Reset();
             SolveExample(ab4Step, "Adams-Bashfort 4");
 
-            var gl6Step = new GaussLegendre3StepSolver(dt, 3, 1e-6)
+            var gl6Step = new GaussLegendre3StepSolver(dt, 3, 1e-12)
             {
                 Function = (t, x, dxdt) =>
                 {
@@ -127,13 +105,13 @@ namespace OdeTest
                 t = 0,
                 x = [10, 1, 1],
                 dtMaxMultiplier = 4,
-                Tolerance = 1e-6,
+                Tolerance = 1e-12,
                 EpsilonVectorNorm = (eps) => eps.Sum(e => Math.Abs(e)),
             };
 
             SolveExample(gl6Step, "Gauss-Legendre 6");
 
-            var am4Step = new AdamsMultonStepSolver(dt, 3, 1e-6)
+            var am4Step = new AdamsMulton4StepSolver(dt, 3, 1e-12)
             {
                 Function = (t, x, dxdt) =>
                 {
@@ -147,10 +125,10 @@ namespace OdeTest
                 t = 0,
                 x = [10, 1, 1],
             };
-
+            am4Step.Reset();
             SolveExample(am4Step, "Adams-Multon 4");
 
-            formsPlot.Plot.ShowLegend(ScottPlot.Alignment.UpperRight);*/
+            formsPlot.Plot.ShowLegend(ScottPlot.Alignment.UpperRight);
         }
 
         private void SolveExample(OdeStepSolver stepSolver, string label)
@@ -161,10 +139,10 @@ namespace OdeTest
             var solver = new OdeSolver
             {
                 StepSolver = stepSolver,
-                Stop = (t, x) => t >= 100,
-                EndInterpolator = new EndChordInterpolator(1e-6)
+                Stop = (t, x) => t >= 35,
+                EndInterpolator = new EndChordInterpolator(1e-12)
                 {
-                    OdeDistanceToStop = (t, x) => t - 100
+                    OdeDistanceToStop = (t, x) => t - 35
                 },
                 Observer = (t, x) =>
                 {
