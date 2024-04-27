@@ -190,6 +190,8 @@ In this example, the class and its value are t - 100 = 0.
 
 В таблице ниже представлено сравнение скорости методов для задачи Лоренца при шаге интегрирования &Delta; = 2<sup>-13</sup>, момент окончания расчета t=100, адаптивные методы решали задачу с точностью 10<sup>-8</sup>.
 
+The table below shows a comparison of the speed of the methods for the Lorentz problem at the integration step &Delta; = 2<sup>-13</sup>,at the end of the calculation, t=100, adaptive methods solved the problem with an accuracy of 10<sup>-8</sup>.
+
 |        Метод            |         Время, мс      |
 |-------------------------|------------------------|
 | Рунге-Кутта 4           | 247                    |
@@ -201,7 +203,9 @@ In this example, the class and its value are t - 100 = 0.
 
 ### Точность методов / Accuracy of methods
 
-Исследуем точность на простом примере
+Исследуем точность на примере
+
+Let's examine the accuracy using an example
 
 ```math
 \dfrac{dx}{dt}=x
@@ -213,11 +217,15 @@ x_0=1
 
 Аналитическое решение
 
+Analytical solution
+
 ```math
 x(t)=e^{t}
 ```
 
 В таблице ниже представлено сравнение точности методов при шаге интегрирования &Delta; = 1/8, момент окончания расчета t=1, x(1)=2,718281828459045235360287471352...
+
+The table below shows a comparison of the accuracy of the methods at the integration step &Delta; = 1/8, the moment of completion of the calculation t=1, x(1)=2,718281828459045235360287471352...
 
 |        Метод            |       Решение      |         Ошибка         |
 |-------------------------|--------------------|------------------------|
