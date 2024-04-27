@@ -179,16 +179,33 @@ In this example, the class and its value are t - 100 = 0.
 
 ### Сравнение методов / Comparison of methods
 
-![image](https://github.com/DaniilKlyukin/OdeSystemSolverLibrary/assets/32903150/136761ca-17a8-43d3-a9f5-0978adb61356)
-![image](https://github.com/DaniilKlyukin/OdeSystemSolverLibrary/assets/32903150/c4973f11-76ba-4485-bf9b-302606f73374)
-![image](https://github.com/DaniilKlyukin/OdeSystemSolverLibrary/assets/32903150/734ba4de-3ed8-4fcd-bf97-2c6abb3640a2)
-![image](https://github.com/DaniilKlyukin/OdeSystemSolverLibrary/assets/32903150/022f7dff-999f-4b7c-b689-6fd6226577f4)
-![image](https://github.com/DaniilKlyukin/OdeSystemSolverLibrary/assets/32903150/6e72483e-f1b6-49e4-9f8f-88ea40ccbe1c)
-![image](https://github.com/DaniilKlyukin/OdeSystemSolverLibrary/assets/32903150/7b7d84f3-89b6-4603-b0d6-ae582c0a3f81)
+![image](https://github.com/DaniilKlyukin/OdeSystemSolverLibrary/assets/32903150/2b4ba92e-f77f-4133-bf12-7c3754e0ef00)
+![image](https://github.com/DaniilKlyukin/OdeSystemSolverLibrary/assets/32903150/2912205f-60e5-4a1a-902e-641fa3bb8b04)
+![image](https://github.com/DaniilKlyukin/OdeSystemSolverLibrary/assets/32903150/0d2fd60b-6db4-46a4-8d42-907c0f7957cd)
+![image](https://github.com/DaniilKlyukin/OdeSystemSolverLibrary/assets/32903150/bd290400-0be8-48a1-ac57-baa3c34bfc65)
+![image](https://github.com/DaniilKlyukin/OdeSystemSolverLibrary/assets/32903150/29bff06e-0779-47c9-a99d-1280311bc665)
+![image](https://github.com/DaniilKlyukin/OdeSystemSolverLibrary/assets/32903150/83b09472-b79f-48bb-81ba-43d8e623f669)
+
+### Скорость методов / Speed of methods
+
+В таблице ниже представлено сравнение скорости методов для задачи Лоренца при шаге интегрирования &Delta; = 2<sup>-13</sup>, момент окончания расчета t=100, адаптивные методы решали задачу с точностью 10<sup>-8</sup>.
+
+The table below shows a comparison of the speed of the methods for the Lorentz problem at the integration step &Delta; = 2<sup>-13</sup>,at the end of the calculation, t=100, adaptive methods solved the problem with an accuracy of 10<sup>-8</sup>.
+
+|        Метод            |         Время, мс      |
+|-------------------------|------------------------|
+| Рунге-Кутта 4           | 247                    |
+| Рунге-Кутта-Фельберга 5 | 261                    |
+| Дорманда-Принса 8       | 509                    |
+| Адамса-Башфорта 4       | 199                    |
+| Гаусса-Лежандра 6       | 1000                   |
+| Адамса-Мультона 4       | 740                    |
 
 ### Точность методов / Accuracy of methods
 
-Исследуем точность на простом примере
+Исследуем точность на примере
+
+Let's examine the accuracy using an example
 
 ```math
 \dfrac{dx}{dt}=x
@@ -200,20 +217,24 @@ x_0=1
 
 Аналитическое решение
 
+Analytical solution
+
 ```math
 x(t)=e^{t}
 ```
 
-В таблице ниже представлено сравнение точности методов при шаге интегрирования &Delta; = 1/8
+В таблице ниже представлено сравнение точности методов при шаге интегрирования &Delta; = 1/8, момент окончания расчета t=1, x(1)=2,718281828459045235360287471352...
 
-|     Метод               |    Решение         |    Ошибка               |
-|-------------------------|--------------------|------------------------ |
-| Рунге-Кутта 4           | 2.7182815003405842 | 3.2811846084612739E-07  |
-| Рунге-Кутта-Фельберга 5 | 2.7182817601331042 | 6.8325940905111793E-08  |
-| Дорманда-Принса 8       | 2.7182818284590424 | 2.6645352591003757E-15  |
-| Адамса-Башфорта 4       | 2.695996040943295  | 0.022285787515750055    |
-| Гаусса-Лежандра 6       | 2.7182818285619783 | 1.0293321750509676E-10  |
-| Адамса-Мультона 4       | 2.7420515101583947 | 0.023769681699349565    |
+The table below shows a comparison of the accuracy of the methods at the integration step &Delta; = 1/8, the moment of completion of the calculation t=1, x(1)=2,718281828459045235360287471352...
+
+|        Метод            |       Решение      |         Ошибка         |
+|-------------------------|--------------------|------------------------|
+| Рунге-Кутта 4           | 2.7182815003405842 | 3.2811846084612739E-07 |
+| Рунге-Кутта-Фельберга 5 | 2.7182817601331042 | 6.8325940905111793E-08 |
+| Дорманда-Принса 8       | 2.7182818284590424 | 2.6645352591003757E-15 |
+| Адамса-Башфорта 4       | 2.7182687707408806 | 1.3057718164510845E-05 |
+| Гаусса-Лежандра 6       | 2.7182818285619783 | 1.0293321750509676E-10 |
+| Адамса-Мультона 4       | 2.7182807852248594 | 1.0432341857047334E-06 |
 
 ## Пример падение объекта / Example of an object falling
 
