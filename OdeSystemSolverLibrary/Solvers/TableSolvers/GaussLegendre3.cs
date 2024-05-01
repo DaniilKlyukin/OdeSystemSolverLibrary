@@ -2,9 +2,9 @@
 
 namespace OdeSystemSolverLibrary.Solvers.TableSolvers
 {
-    public class GaussLegendre3StepSolver : OdeAdaptiveTableStepSolver
+    public class GaussLegendre3 : OdeAdaptiveTableStepSolver
     {
-        public GaussLegendre3StepSolver(
+        public GaussLegendre3(
             double dt, int equationsCount, double tableSolverTolerance)
             : base(new GaussLegendre3Table(tableSolverTolerance), dt, equationsCount, 6)
         {

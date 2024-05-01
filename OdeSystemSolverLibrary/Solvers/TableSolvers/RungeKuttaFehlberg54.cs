@@ -2,9 +2,9 @@
 
 namespace OdeSystemSolverLibrary.Solvers.TableSolvers
 {
-    public class RungeKuttaFehlberg54StepSolver : OdeAdaptiveTableStepSolver
+    public class RungeKuttaFehlberg54 : OdeAdaptiveTableStepSolver
     {
-        public RungeKuttaFehlberg54StepSolver(
+        public RungeKuttaFehlberg54(
              double dt,
              int equationsCount)
             : base(

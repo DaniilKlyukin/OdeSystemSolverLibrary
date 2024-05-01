@@ -1,10 +1,10 @@
 ﻿namespace OdeSystemSolverLibrary
 {
-    public class EndChordInterpolator : EndInterpolator
+    public class ChordInterpolator : EndInterpolator
     {
         private readonly double tolerance;
 
-        public EndChordInterpolator(double tolerance)
+        public ChordInterpolator(double tolerance)
         {
             this.tolerance = tolerance;
         }

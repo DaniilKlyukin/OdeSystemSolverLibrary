@@ -10,6 +10,6 @@
 
         public double[] GetC() => [0, 0.5, 0.5, 1];
 
-        public IButcherSolver GetButcherSolver() => new ExplicitButcherSolver();
+        public IButcherSolver GetButcherSolver() => new ExplicitButcher();
     }
 }

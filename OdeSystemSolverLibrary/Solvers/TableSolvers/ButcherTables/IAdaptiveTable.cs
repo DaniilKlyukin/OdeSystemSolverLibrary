@@ -1,6 +1,6 @@
 ﻿namespace OdeSystemSolverLibrary.Solvers.TableSolvers.ButcherTables
 {
-    public interface IAdaptiveButcherTable : IButcherTable
+    public interface IAdaptiveTable : IButcherTable
     {
         public double[] GetBStar();
     }

@@ -15,7 +15,7 @@ namespace OdeSystemSolverLibrary.Solvers.TableSolvers
         private readonly int methodDegree;
 
         protected OdeAdaptiveTableStepSolver(
-            IAdaptiveButcherTable butcherTable,
+            IAdaptiveTable butcherTable,
             double dt,
             int equationsCount,
             int methodDegree)

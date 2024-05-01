@@ -1,6 +1,6 @@
 ﻿namespace OdeSystemSolverLibrary
 {
-    public class ExplicitButcherSolver : IButcherSolver
+    public class ExplicitButcher : IButcherSolver
     {
         public void Solve(
             OdeFunction function,

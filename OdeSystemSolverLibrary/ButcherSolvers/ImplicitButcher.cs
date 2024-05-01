@@ -1,10 +1,10 @@
 ﻿namespace OdeSystemSolverLibrary
 {
-    public class ImplicitButcherSolver : IButcherSolver
+    public class ImplicitButcher : IButcherSolver
     {
         private readonly double tolerance;
 
-        public ImplicitButcherSolver(double tolerance)
+        public ImplicitButcher(double tolerance)
         {
             this.tolerance = tolerance;
         }

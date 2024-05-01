@@ -1,6 +1,6 @@
 ﻿namespace OdeSystemSolverLibrary.Solvers.TableSolvers.ButcherTables
 {
-    public class RungeKuttaFehlberg54Table : IAdaptiveButcherTable
+    public class RungeKuttaFehlberg54Table : IAdaptiveTable
     {
         public int StagesCount => 6;
 
@@ -23,6 +23,6 @@
         public double[] GetC() =>
             [0, 0.25, 3.0 / 8, 12.0 / 13, 1, 0.5];
 
-        public IButcherSolver GetButcherSolver() => new ExplicitButcherSolver();
+        public IButcherSolver GetButcherSolver() => new ExplicitButcher();
     }
 }

@@ -2,13 +2,13 @@
 
 namespace OdeSystemSolverLibrary.Solvers
 {
-    public class AdamsBashforth4StepSolver : AdamsStepSolver
+    public class AdamsBashforth4 : AdamsStepSolver
     {
         public override int StagesCount => 5;
 
         public override int InitialSteps => 5;
 
-        public AdamsBashforth4StepSolver(
+        public AdamsBashforth4(
             double dt, int equationsCount)
             : base(dt, equationsCount)
         {
@@ -49,7 +49,7 @@ namespace OdeSystemSolverLibrary.Solvers
 
             _solveStep = solveInitialStep;
 
-            boosterSolver = new DormandPrince87StepSolver(dt, x.Length)
+            boosterSolver = new DormandPrince87(dt, x.Length)
             {
                 Function = Function,
                 t = t,

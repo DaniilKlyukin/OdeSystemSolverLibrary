@@ -2,9 +2,9 @@
 
 namespace OdeSystemSolverLibrary.Solvers.TableSolvers
 {
-    public class DormandPrince87StepSolver : OdeAdaptiveTableStepSolver
+    public class DormandPrince87 : OdeAdaptiveTableStepSolver
     {
-        public DormandPrince87StepSolver(
+        public DormandPrince87(
             double dt,
             int equationsCount)
             : base(new DormandPrince87Table(), dt, equationsCount, 8)

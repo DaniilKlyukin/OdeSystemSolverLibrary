@@ -17,7 +17,7 @@ namespace OdeTest
         {
             var dt = 1e-4;
 
-            var rk4Step = new RungeKutta4StepSolver(dt, 3)
+            var rk4Step = new RungeKutta4(dt, 3)
             {
                 Function = (t, x, dxdt) =>
                 {
@@ -34,7 +34,7 @@ namespace OdeTest
 
             SolveExample(rk4Step, "Runge-Kutta 4");
 
-            var rkf54Step = new RungeKuttaFehlberg54StepSolver(dt, 3)
+            var rkf54Step = new RungeKuttaFehlberg54(dt, 3)
             {
                 Function = (t, x, dxdt) =>
                 {
@@ -54,7 +54,7 @@ namespace OdeTest
 
             SolveExample(rkf54Step, "Runge-Kutta-Fehlberg 54");
 
-            var dp87Step = new DormandPrince87StepSolver(dt, 3)
+            var dp87Step = new DormandPrince87(dt, 3)
             {
                 Function = (t, x, dxdt) =>
                 {
@@ -74,7 +74,7 @@ namespace OdeTest
 
             SolveExample(dp87Step, "Dormand-Prince 87");
 
-            var ab4Step = new AdamsBashforth4StepSolver(dt, 3)
+            var ab4Step = new AdamsBashforth4(dt, 3)
             {
                 Function = (t, x, dxdt) =>
                 {
@@ -91,7 +91,7 @@ namespace OdeTest
             ab4Step.Reset();
             SolveExample(ab4Step, "Adams-Bashfort 4");
 
-            var gl6Step = new GaussLegendre3StepSolver(dt, 3, 1e-12)
+            var gl6Step = new GaussLegendre3(dt, 3, 1e-12)
             {
                 Function = (t, x, dxdt) =>
                 {
@@ -111,7 +111,7 @@ namespace OdeTest
 
             SolveExample(gl6Step, "Gauss-Legendre 6");
 
-            var am4Step = new AdamsMulton4StepSolver(dt, 3, 1e-12)
+            var am4Step = new AdamsMulton4(dt, 3, 1e-12)
             {
                 Function = (t, x, dxdt) =>
                 {
@@ -140,7 +140,7 @@ namespace OdeTest
             {
                 StepSolver = stepSolver,
                 Stop = (t, x) => t >= 35,
-                EndInterpolator = new EndChordInterpolator(1e-12)
+                EndInterpolator = new ChordInterpolator(1e-12)
                 {
                     OdeDistanceToStop = (t, x) => t - 35
                 },

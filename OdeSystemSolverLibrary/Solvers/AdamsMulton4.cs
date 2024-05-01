@@ -3,7 +3,7 @@
 namespace OdeSystemSolverLibrary.Solvers
 {
 
-    public class AdamsMulton4StepSolver : AdamsStepSolver
+    public class AdamsMulton4 : AdamsStepSolver
     {
         public override int StagesCount => 5;
 
@@ -11,7 +11,7 @@ namespace OdeSystemSolverLibrary.Solvers
 
         private readonly double tolerance;
 
-        public AdamsMulton4StepSolver(
+        public AdamsMulton4(
             double dt, int equationsCount, double tolerance)
             : base(dt, equationsCount)
         {
@@ -83,7 +83,7 @@ namespace OdeSystemSolverLibrary.Solvers
 
             _solveStep = solveInitialStep;
 
-            boosterSolver = new DormandPrince87StepSolver(dt, x.Length)
+            boosterSolver = new DormandPrince87(dt, x.Length)
             {
                 Function = Function,
                 t = t,

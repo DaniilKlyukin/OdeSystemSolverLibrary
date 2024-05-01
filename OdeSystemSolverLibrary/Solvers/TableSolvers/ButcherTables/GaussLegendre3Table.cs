@@ -1,6 +1,6 @@
 ﻿namespace OdeSystemSolverLibrary.Solvers.TableSolvers.ButcherTables
 {
-    public class GaussLegendre3Table : IAdaptiveButcherTable
+    public class GaussLegendre3Table : IAdaptiveTable
     {
         private readonly double tolerance;
         private double SQRT15 = Math.Sqrt(15);
@@ -26,7 +26,7 @@
 
         public double[] GetC() => [0.5 - SQRT15 / 10, 0.5, 0.5 + SQRT15 / 10];
 
-        public IButcherSolver GetButcherSolver() => new ImplicitButcherSolver(tolerance);
+        public IButcherSolver GetButcherSolver() => new ImplicitButcher(tolerance);
 
     }
 }

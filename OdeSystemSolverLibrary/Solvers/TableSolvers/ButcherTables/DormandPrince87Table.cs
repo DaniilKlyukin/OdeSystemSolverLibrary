@@ -1,6 +1,6 @@
 ﻿namespace OdeSystemSolverLibrary.Solvers.TableSolvers.ButcherTables
 {
-    public class DormandPrince87Table : IAdaptiveButcherTable
+    public class DormandPrince87Table : IAdaptiveTable
     {
         public int StagesCount => 13;
 
@@ -28,7 +28,7 @@ public double[] GetB() => [14005451.0 / 335480064.0, 0, 0, 0, 0, -59238493.0 / 1
 
         public double[] GetC() => [0, 1.0 / 18.0, 1.0 / 12.0, 1.0 / 8.0, 5.0 / 16.0, 3.0 / 8.0, 59.0 / 400.0, 93.0 / 200.0, 5490023248.0 / 9719169821.0, 13.0 / 20.0, 1201146811.0 / 1299019798.0, 1.0, 1.0];
 
-        public IButcherSolver GetButcherSolver() => new ExplicitButcherSolver();
+        public IButcherSolver GetButcherSolver() => new ExplicitButcher();
 
     }
 }
