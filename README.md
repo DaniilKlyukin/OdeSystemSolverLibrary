@@ -37,7 +37,7 @@ using OdeSystemSolverLibrary.Solvers.TableSolvers;
 var x0 = new List<double>();
 var x2 = new List<double>();
 
-var rk4Step = new RungeKutta4StepSolver(0.001, 3)
+var rk4Step = new RungeKutta4(0.001, 3)
 {
     Function = (t, x, dxdt) =>
     {
@@ -95,7 +95,7 @@ Any step-by-step solver can be passed to the OdeSolver class to solve a system o
 An example with the adaptive Runge-Kutta-Felberg method of the 5th order.
 
 ``` cs
-var rkf54Step = new RungeKuttaFehlberg54StepSolver(0.001, 3)
+var rkf54 = new RungeKuttaFehlberg54(0.001, 3)
 {
     Function = (t, x, dxdt) =>
     {
@@ -118,7 +118,7 @@ var x2 = new List<double>();
 
 var solver = new OdeSolver
 {
-    StepSolver = rkf54Step,
+    StepSolver = rkf54,
     Stop = (t, x) => t >= 100,
     EndInterpolator = new EndChordInterpolator(1e-6)
     {
@@ -167,13 +167,13 @@ Stop = (t, x) => ...,
 To avoid jumping over the last point at which the calculation ends, it is necessary to use interpolation:
 
 ``` cs
-EndInterpolator = new EndChordInterpolator(1e-6)
+EndInterpolator = new ChordInterpolator(1e-6)
 {
     OdeDistanceToStop = (t, x) => t - 100
 },
 ```
 
-В данном примере класс ```EndChordInterpolator``` ищет решение задачи  t - 100 = 0.
+В данном примере класс ```ChordInterpolator``` ищет решение задачи  t - 100 = 0.
 
 In this example, the class and its value are t - 100 = 0.
 
@@ -256,7 +256,7 @@ t_0=0, & v_0=0, & y_0=10
 ```
 
 ``` cs
-var stepSolver = new GaussLegendre3StepSolver(0.001, 2, 1e-6)
+var stepSolver = new GaussLegendre3(0.001, 2, 1e-6)
 {
     Function = (t, x, dxdt) =>
     {
@@ -276,7 +276,7 @@ var solver = new OdeSolver
 {
     StepSolver = stepSolver,
     Stop = (t, x) => x[1] <= 0,
-    EndInterpolator = new EndChordInterpolator(1e-6)
+    EndInterpolator = new ChordInterpolator(1e-6)
     {
         OdeDistanceToStop = (t, x) => x[1]
     },
