@@ -1,4 +1,4 @@
-﻿namespace OdeSystemSolverLibrary
+﻿namespace OdeSystemSolverLibrary.Solvers
 {
     public delegate void OdeFunction(double t, double[] x, double[] dxdt);
     public abstract class OdeStepSolver

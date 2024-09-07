@@ -3,6 +3,8 @@ using OdeSystemSolverLibrary.Solvers;
 using OdeSystemSolverLibrary.Solvers.TableSolvers;
 using ScottPlot.WinForms;
 using System.Diagnostics;
+using System.Security.Cryptography;
+using OdeSystemSolverLibrary.EndInterpolators;
 
 namespace OdeTest
 {
@@ -139,12 +141,12 @@ namespace OdeTest
             var solver = new OdeSolver
             {
                 StepSolver = stepSolver,
-                Stop = (t, x) => t >= 35,
+                Stop = (i, t, x) => t >= 35,
                 EndInterpolator = new ChordInterpolator(1e-12)
                 {
                     OdeDistanceToStop = (t, x) => t - 35
                 },
-                Observer = (t, x) =>
+                Observer = (i, t, x) =>
                 {
                     x0.Add(x[0]);
                     x2.Add(x[2]);

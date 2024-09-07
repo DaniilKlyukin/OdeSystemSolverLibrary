@@ -1,4 +1,6 @@
-﻿namespace OdeSystemSolverLibrary
+﻿using OdeSystemSolverLibrary.Solvers;
+
+namespace OdeSystemSolverLibrary.EndInterpolators
 {
     public delegate double OdeDistanceToStop(double t, double[] x);
     public abstract class EndInterpolator

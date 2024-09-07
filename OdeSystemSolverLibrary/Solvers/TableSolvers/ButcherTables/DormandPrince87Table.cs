@@ -1,4 +1,6 @@
-﻿namespace OdeSystemSolverLibrary.Solvers.TableSolvers.ButcherTables
+﻿using OdeSystemSolverLibrary.ButcherSolvers;
+
+namespace OdeSystemSolverLibrary.Solvers.TableSolvers.ButcherTables
 {
     public class DormandPrince87Table : IAdaptiveTable
     {

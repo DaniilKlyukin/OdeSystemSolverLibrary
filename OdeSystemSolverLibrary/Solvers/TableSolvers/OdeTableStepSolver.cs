@@ -1,4 +1,5 @@
-﻿using OdeSystemSolverLibrary.Solvers.TableSolvers.ButcherTables;
+﻿using OdeSystemSolverLibrary.ButcherSolvers;
+using OdeSystemSolverLibrary.Solvers.TableSolvers.ButcherTables;
 
 namespace OdeSystemSolverLibrary.Solvers.TableSolvers
 {

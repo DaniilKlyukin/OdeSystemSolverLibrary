@@ -1,4 +1,6 @@
-﻿namespace OdeSystemSolverLibrary
+﻿using OdeSystemSolverLibrary.Solvers;
+
+namespace OdeSystemSolverLibrary.EndInterpolators
 {
     public class ChordInterpolator : EndInterpolator
     {
